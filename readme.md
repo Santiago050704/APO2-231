@@ -9,7 +9,7 @@ Este es el repositorio del curso. Ejemplos de código, acceso a videos, etc. ser
 <small>Click en el logo para ingresar</small>
 
 ### Chat
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/479px-WhatsApp.svg.png" width="128">
+<a href="https://chat.whatsapp.com/ItYkw4IoUYw4LMk5XMRc1e"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/479px-WhatsApp.svg.png" width="128"></a>
 <a href="https://chat.whatsapp.com/ItYkw4IoUYw4LMk5XMRc1e">Grupo de Whatsapp del curso</a>
 
 
