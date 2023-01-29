@@ -12,6 +12,10 @@ Este es el repositorio del curso. Ejemplos de código, acceso a videos, etc. ser
 <a href="https://chat.whatsapp.com/ItYkw4IoUYw4LMk5XMRc1e"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/479px-WhatsApp.svg.png" width="128"></a><br>
 <a href="https://chat.whatsapp.com/ItYkw4IoUYw4LMk5XMRc1e">Grupo de Whatsapp del curso</a>
 
+### Datos
+
+<a href="https://forms.gle/oREjBBXpRU1dwua5A">Responder encuesta</a>
+
 
 ### Formato de test
 <a href="https://docs.google.com/document/d/1pmCE3p_sOByplPq3sx8I4OkXnmm1pZ-M/edit?usp=sharing&ouid=117897710133227559254&rtpof=true&sd=true">Formato de test 2023</a>
