@@ -37,14 +37,17 @@ public class DobleEnlace {
             if(current == head){
                 head = head.getNext();
                 head.setPrevious(null);
+                return;
             }else if(current == tail){
                 tail = tail.getPrevious();
                 tail.setNext(null);
+                return;
             }else{
                 Node prev = current.getPrevious();
                 Node next = current.getNext();
                 prev.setNext(next);
                 next.setPrevious(prev);
+                return;
             }
         }
         deleteNode(current.getNext(), name);
