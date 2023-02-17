@@ -34,6 +34,8 @@ public class CircularList {
     public void delete(String name){
         if(head == null){
             System.out.println("Lista vacía.");
+        }else if(head == head.getNext()){
+            head = null;
         }else{
             delete(head, name);
         }
