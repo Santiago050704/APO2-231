@@ -15,9 +15,16 @@ public class Main {
         tree.add(e);
         tree.add(f);
 
-        System.out.println(a.getLeft().getKey());
+        /*System.out.println(a.getLeft().getKey());
         System.out.println(a.getLeft().getRight().getKey());
         System.out.println(a.getRight().getLeft().getKey());
-        System.out.println(e.getLeft().getKey());
+        System.out.println(e.getLeft().getKey());*/
+
+        Node n = tree.getMax();
+        System.out.println(n.getKey());
+
+        tree.inOrder();
+        Node search = tree.search("Santiago");
+        System.out.println(search.getKey());
     }
 }
