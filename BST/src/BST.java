@@ -5,7 +5,7 @@ public class BST {
     public void add(Node node){
         if(root == null){
             root = node;
-            System.out.println(root.getKey());
+            //System.out.println(root.getKey());
         }else{
             add(root, node);
         }
@@ -82,5 +82,49 @@ public class BST {
         }else{
             return search(current.getRight(), goal);
         }
+    }
+
+    public void delete(String goal){
+        delete(null, root, goal);
+    }
+
+    private void delete(Node parent, Node current, String goal){
+        //Node ref = search(current, goal);
+        if(current == null){
+            System.out.println("Not found.");
+            return;
+        }
+        //Se encontró al nodo
+        if(goal.equals(current.getKey())){
+            //Es un nodo hoja
+            if(current.getRight() == null && current.getLeft() == null){
+                if(parent.getLeft() == current){
+                    parent.setLeft(null);
+                }else{
+                    parent.setRight(null);
+                }
+            }else if(current.getRight() != null && current.getLeft() == null){
+                if(parent.getLeft() == current){
+                    parent.setLeft(current.getRight());
+                }else{
+                    parent.setRight(current.getRight());
+                }
+            }else if(current.getRight() == null && current.getLeft() != null){
+
+            }else if(current.getRight() != null && current.getLeft() != null){
+
+            }
+        }else if(goal.compareTo(current.getKey()) < 0){
+            delete(current, current.getLeft(), goal);
+        }else if(goal.compareTo(current.getKey()) > 0){
+            delete(current, current.getRight(), goal);
+        }
+        /*else{
+            if(current.getLeft().getKey().equals(goal)){
+                current.setLeft(null);
+            }else if(current.getRight().equals(goal)){
+                current.setRight(null);
+            }
+        }*/
     }
 }

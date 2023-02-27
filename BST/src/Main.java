@@ -1,12 +1,15 @@
 public class Main {
     public static void main(String[] args) {
         BST tree =  new BST();
-        Node a = new Node("Miguel");
-        Node b = new Node("Sebastian");
-        Node c = new Node("Juan");
-        Node d = new Node("Santiago");
-        Node e = new Node("Lina");
-        Node f = new Node("Laura");
+        Node a = new Node("David");
+        Node b = new Node("Julian");
+        Node c = new Node("Pablo");
+        Node d = new Node("Juan");
+        Node e = new Node("Isabella");
+        Node f = new Node("Daniela");
+        Node g = new Node("James");
+        Node h = new Node("Sara");
+
 
         tree.add(a);
         tree.add(b);
@@ -14,17 +17,12 @@ public class Main {
         tree.add(d);
         tree.add(e);
         tree.add(f);
-
-        /*System.out.println(a.getLeft().getKey());
-        System.out.println(a.getLeft().getRight().getKey());
-        System.out.println(a.getRight().getLeft().getKey());
-        System.out.println(e.getLeft().getKey());*/
-
-        Node n = tree.getMax();
-        System.out.println(n.getKey());
+        tree.add(g);
+        tree.add(h);
 
         tree.inOrder();
-        Node search = tree.search("Santiago");
-        System.out.println(search.getKey());
+        tree.delete("Isabella");
+        System.out.println("*********");
+        tree.inOrder();
     }
 }
