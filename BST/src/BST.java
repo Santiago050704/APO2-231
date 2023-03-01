@@ -103,14 +103,21 @@ public class BST {
                 }else{
                     parent.setRight(null);
                 }
+                //Es un nodo con hijo derecho
             }else if(current.getRight() != null && current.getLeft() == null){
                 if(parent.getLeft() == current){
                     parent.setLeft(current.getRight());
                 }else{
                     parent.setRight(current.getRight());
                 }
+                //Es un nodo con hijo izquierdo
             }else if(current.getRight() == null && current.getLeft() != null){
-
+                if(parent.getLeft() == current){
+                    parent.setLeft(current.getLeft());
+                }else{
+                    parent.setRight(current.getLeft());
+                }
+                //Es un nodo con hijo derecho e izquierdo
             }else if(current.getRight() != null && current.getLeft() != null){
 
             }
