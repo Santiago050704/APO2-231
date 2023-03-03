@@ -89,13 +89,16 @@ public class BST {
     }
 
     private void delete(Node parent, Node current, String goal){
-        //Node ref = search(current, goal);
         if(current == null){
             System.out.println("Not found.");
             return;
         }
         //Se encontró al nodo
         if(goal.equals(current.getKey())){
+            //Solo hay un nodo en el árbol.
+            if(current == root && current.getLeft() == null && current.getRight() == null){
+                root = null;
+            }
             //Es un nodo hoja
             if(current.getRight() == null && current.getLeft() == null){
                 if(parent.getLeft() == current){
@@ -119,19 +122,16 @@ public class BST {
                 }
                 //Es un nodo con hijo derecho e izquierdo
             }else if(current.getRight() != null && current.getLeft() != null){
-
+                Node sucessor = getMin(current.getRight());
+                //Sobrescribir la key y los valores
+                current.setKey(sucessor.getKey());
+                //Si tienen valores hacer current.setValue(sucessor.getValue())
+                delete(current, current.getRight(), sucessor.getKey());
             }
         }else if(goal.compareTo(current.getKey()) < 0){
             delete(current, current.getLeft(), goal);
         }else if(goal.compareTo(current.getKey()) > 0){
             delete(current, current.getRight(), goal);
         }
-        /*else{
-            if(current.getLeft().getKey().equals(goal)){
-                current.setLeft(null);
-            }else if(current.getRight().equals(goal)){
-                current.setRight(null);
-            }
-        }*/
     }
 }
