@@ -2,22 +2,39 @@ import model.Student;
 import model.StudentList;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.Scanner;
 
 public class Main {
+    static StudentList studentList = new StudentList();
     public static void main(String[] args) throws IOException {
-        Student A = new Student("Alberto", "A111", 18);
-        Student B = new Student("Benito", "A222", 19);
-        Student C = new Student("Carlos", "A333", 20);
-        Student D = new Student("Daniela", "A444", 21);
 
-        StudentList studentList = new StudentList();
-        studentList.getStudents().add(A);
-        studentList.getStudents().add(B);
-        studentList.getStudents().add(C);
-        studentList.getStudents().add(D);
+        //Cargar la información
+        studentList.load();
+        Scanner scanner = new Scanner(System.in);
 
-        //System.out.println(studentList.toString());
-
-        studentList.save();
+        while(true){
+            System.out.println("1. Añadir\n2. Mostrar\n3. Salir\n");
+            int option = Integer.parseInt(scanner.nextLine());
+            switch(option){
+                case 1:
+                    //Nombre++Code++Edad
+                    System.out.println("Escriba la entrada con el formato Nombre++Code++Edad");
+                    String input = scanner.nextLine();
+                    String[] data = input.split("\\+\\+");
+                    System.out.println(Arrays.toString(data));
+                    studentList.getStudents().add(
+                            new Student(data[0], data[1], Integer.parseInt(data[2]))
+                    );
+                    studentList.save();
+                    break;
+                case 2:
+                    studentList.show();
+                    break;
+                case 3:
+                    System.exit(0);
+                    break;
+            }
+        }
     }
 }
