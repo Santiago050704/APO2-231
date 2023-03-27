@@ -5,8 +5,8 @@ import java.util.Arrays;
 
 public class StudentList {
 
-    static String folder = "data";
-    static String path = "/C:/Users/svale/Documents/data/data.txt";
+    static String folder = "data"; //Se crea una carpeta con nombre data.
+    static String path = "data/data.txt"; //Se crea un archivo data.txt que se guardará en data.
     ArrayList<Student> students;
 
     public StudentList() {
@@ -22,25 +22,36 @@ public class StudentList {
     }
 
     public void save() throws IOException {
-        File file = new File(path);
-        FileOutputStream fos = new FileOutputStream(file);
+        File file = new File(path); //Crea un objeto de tipo File que representa un archivo o directorio en el sistema de archivos. El constructor
+        //recibe un String que representa el path donde será creado el archivo.
+
+        FileOutputStream fos = new FileOutputStream(file); //Crea un objeto que se utiliza para escribir datos en un archivo. El objeto
+        //FileOutputStream se asigna a la variable fos, y luego se puede escribir datos en el archivo usando los métodos de la clase
+        //FileOutputStream.
+
         String data = "";
         for(int i = 0; i < students.size(); i++){
             data += students.get(i).getName() + ":" + students.get(i).getCode() + ":" + students.get(i).getAge() + "\n";
+            //Se añade el objeto estudiante por sus atributos a la variable data, separados por ":".
         }
-        BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(fos));
-        writer.write(data);
-        writer.flush();
-        fos.close();
+
+        BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(fos)); //Se crea un objeto BufferedWriter para escribir en un
+        //archivo llamado fos. OutputStreamWriter convierte los caracteres escritos en bytes. Es decir, OutputStreamWriter convierte los
+        //caracteres escritos en bytes y los escribe en el objeto FileOutputStream llamado fos.
+
+        writer.write(data); //Se usa el objeto writer para escribir en fos lo que se guardó en la variable data.
+
+        writer.flush(); //Se utiliza para vaciar el búfer de salida del objeto writer. Así se asegura que cualquier byte que se haya
+        //almacenado en el búfer de salida se escriba en el archivo file, envuelto por el objeto fos.
+
+        fos.close(); //Asegura que cualquier recurso del sistema asociado con el objeto FileOutputStream se libere.
     }
 
     public void load() throws IOException {
-
         File file = new File(path);
         if(file.exists()){
             FileInputStream fis = new FileInputStream(file);
             BufferedReader reader = new BufferedReader(new InputStreamReader(fis));
-
             String content = "";
             String line = "";
             while((line = reader.readLine()) != null){
