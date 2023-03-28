@@ -1,9 +1,13 @@
 package model;
+import com.google.gson.Gson;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class StudentList {
+    /*Objeto -> String: Serialización
+    * String -> Objeto: Deserialización*/
 
     static String folder = "data"; //Se crea una carpeta con nombre data.
     static String path = "data/data.txt"; //Se crea un archivo data.txt que se guardará en data.
@@ -29,11 +33,12 @@ public class StudentList {
         //FileOutputStream se asigna a la variable fos, y luego se puede escribir datos en el archivo usando los métodos de la clase
         //FileOutputStream.
 
-        String data = "";
-        for(int i = 0; i < students.size(); i++){
+        Gson gson = new Gson();
+        String data = gson.toJson(students);
+        /*for(int i = 0; i < students.size(); i++){
             data += students.get(i).getName() + ":" + students.get(i).getCode() + ":" + students.get(i).getAge() + "\n";
             //Se añade el objeto estudiante por sus atributos a la variable data, separados por ":".
-        }
+        }*/
 
         BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(fos)); //Se crea un objeto BufferedWriter para escribir en un
         //archivo llamado fos. OutputStreamWriter convierte los caracteres escritos en bytes. Es decir, OutputStreamWriter convierte los
@@ -55,17 +60,23 @@ public class StudentList {
             String content = "";
             String line = "";
             while((line = reader.readLine()) != null){
-                System.out.println(line);
+                /*System.out.println(line);
                 String[] arr = line.split(":");
                 System.out.println(Arrays.toString(arr));
                 students.add(
                         new Student(arr[0], arr[1], Integer.parseInt(arr[2]))
-                );
+                );*/
                 content += line + "\n";
-
             }
-            System.out.println(students.size());
-            //System.out.println(content);
+            System.out.println(content);
+            Gson gson = new Gson();
+            Student[] array = gson.fromJson(content, Student[].class);
+            /*for(Student s : array){
+                students.add(s);
+            }*/
+            students.addAll(Arrays.asList(array)); //Agrega todo transformado en lista.
+            fis.close();
+            //System.out.println(students.size());
         }else{
             File f = new File(folder);
             if(!f.exists()){
