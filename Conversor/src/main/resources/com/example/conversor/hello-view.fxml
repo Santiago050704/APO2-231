@@ -5,8 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-
-<AnchorPane fx:controller="com.example.conversor.HelloController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.conversor.HelloController">
    <children>
       <TextArea fx:id="outputTA" layoutX="145.0" layoutY="212.0" prefHeight="158.0" prefWidth="322.0" />
       <Button fx:id="saveBtn" layoutX="481.0" layoutY="345.0" mnemonicParsing="false" onAction="#save" text="Guardar" />
@@ -43,5 +42,7 @@
           </Menu>
         </menus>
       </MenuBar>
+      <Button layoutX="45.0" layoutY="232.0" mnemonicParsing="false" onAction="#testButton" text="A" />
+      <Button layoutX="45.0" layoutY="279.0" mnemonicParsing="false" onAction="#testButton" text="B" />
    </children>
 </AnchorPane>
