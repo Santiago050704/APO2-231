@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="344.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.tablas.HelloController">
+   <children>
+      <TableView fx:id="contactTable" layoutX="19.0" layoutY="16.0" prefHeight="308.0" prefWidth="302.0">
+        <columns>
+          <TableColumn fx:id="nameTC" prefWidth="75.0" text="Nombre" />
+          <TableColumn fx:id="lastnameTC" prefWidth="75.0" text="Apellido" />
+            <TableColumn fx:id="phoneTC" prefWidth="75.0" text="Teléfono" />
+        </columns>
+      </TableView>
+      <Button fx:id="addBtn" layoutX="118.0" layoutY="334.0" mnemonicParsing="false" text="Agregar contacto" />
+   </children>
+</AnchorPane>
