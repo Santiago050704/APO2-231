@@ -2,6 +2,7 @@ package com.example.tablas;
 
 import com.example.tablas.model.Contact;
 import com.example.tablas.model.ContactList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -42,9 +43,7 @@ public class HelloController implements Initializable {
         );
 
         addBtn.setOnAction(action->{
-            System.out.println("Jassa");
-            Contact alfa = new Contact("Alfa", "Beta", 5984916);
-            ContactList.getInstance().getContacts().add(alfa);
+            HelloApplication.openWindow("form.fxml");
         });
     }
 

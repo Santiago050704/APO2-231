@@ -6,9 +6,17 @@ import javafx.collections.ObservableList;
 public class ContactList {
 
     //Globales
-    ObservableList<Contact> contacts = FXCollections.observableArrayList();
+    private ObservableList<Contact> contacts = FXCollections.observableArrayList();
 
     //Constructor privado
+    public ObservableList<Contact> getContacts(){
+        return contacts;
+    }
+
+    public void setContacts(ObservableList<Contact> contacts) {
+        this.contacts = contacts;
+    }
+
     private ContactList(){
 
     }
@@ -22,11 +30,6 @@ public class ContactList {
         return instance;
     }
 
-    public ObservableList<Contact> getContacts() {
-        return contacts;
-    }
 
-    public void setContacts(ObservableList<Contact> contacts) {
-        this.contacts = contacts;
-    }
+
 }
