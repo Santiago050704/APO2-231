@@ -20,6 +20,9 @@ public class HelloController implements Initializable {
     private Canvas canvas;
     private GraphicsContext gc;
 
+    private ArrayList<Level> levels;
+    private int currentLevel = 0;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
         /*System.out.println("Inicia hilo");
@@ -58,9 +61,29 @@ public class HelloController implements Initializable {
         canvas.setOnKeyReleased(this::onKeyReleased);
         canvas.setOnMousePressed(this::onMousePressed);
         avatar = new Avatar();
+        levels = new ArrayList<>();
+
+        //Generar el primer mapa
+        Level l1 = new Level(0);
+        l1.setColor(Color.BLUE);
+        Enemy enemy = new Enemy(new Vector(150,150));
+        new Thread(enemy).start();
+        l1.getEnemies().add(enemy);
+        l1.getEnemies().add(new Enemy(new Vector(400, 100)));
+        levels.add(l1);
+
+
         //avatar2 = new Avatar();
-        enemies.add(new Enemy(new Vector(10, 10)));
-        enemies.add(new Enemy(new Vector(15, 15)));
+        levels.get(currentLevel).getEnemies().add(new Enemy(new Vector(10, 10)));
+        levels.get(currentLevel).getEnemies().add(new Enemy(new Vector(15, 15)));
+
+        //Generar el segundo mapa
+        Level l2 = new Level(1);
+        l2.setColor(Color.GRAY);
+        l2.getEnemies().add(new Enemy(new Vector(100, 100)));
+        l2.getEnemies().add(new Enemy(new Vector(100, 50)));
+        l2.getEnemies().add(new Enemy(new Vector(30, 30)));
+        levels.add(l2);
         draw();
     }
 
@@ -73,7 +96,7 @@ public class HelloController implements Initializable {
         diff.normalize();
         diff.setMag(4);
 
-        bullets.add(
+        levels.get(currentLevel).getBullets().add(
                 //new Bullet(new Vector(mouseEvent.getX(), mouseEvent.getY()))
                 new Bullet(
                         new Vector(avatar.pos.getX()+25, avatar.pos.getY()+25),
@@ -99,8 +122,6 @@ public class HelloController implements Initializable {
     private Avatar avatar;
     //private Avatar avatar2;
 
-    private ArrayList<Bullet> bullets = new ArrayList<>();
-    private ArrayList<Enemy> enemies = new ArrayList<>();
 
 
     public void onKeyReleased(KeyEvent event){
@@ -134,11 +155,13 @@ public class HelloController implements Initializable {
     public void draw(){
         Thread ae = new Thread(()->{
             while(isAlive){
+                Level level = levels.get(currentLevel);
 
                 //Dibujar en el lienzo
                 Platform.runLater(()->{
                     //Lo que hagamos aquí, corre en el main thread.
-                    gc.setFill(Color.BLUE);
+
+                    gc.setFill(level.getColor());
 
                     gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
@@ -149,20 +172,51 @@ public class HelloController implements Initializable {
                     avatar.draw(gc);
                     //avatar2.draw2(gc);
 
-                    for(int i = 0; i < bullets.size(); i++){
-                        bullets.get(i).draw(gc);
-                        if(isOutside(bullets.get(i).pos.getX(), bullets.get(i).pos.getY())){
-                            bullets.remove(i); //Se remueve la bala cuando sale de la pantalla.
+                    for(int i = 0; i < level.getBullets().size(); i++){
+                        level.getBullets().get(i).draw(gc);
+                        if(isOutside(level.getBullets().get(i).pos.getX(), level.getBullets().get(i).pos.getY())){
+                            level.getBullets().remove(i); //Se remueve la bala cuando sale de la pantalla.
                         }
                     }
 
-                    for(int i = 0; i < enemies.size(); i++){
-                        enemies.get(i).draw(gc);
+                    for(int i = 0; i < level.getEnemies().size(); i++){
+                        level.getEnemies().get(i).draw(gc);
                     }
-                    System.out.println(bullets.size());
+                    System.out.println(level.getBullets().size());
                 });
 
                 //Cálculos geométricos. Debería estar en el avatar
+
+                //Paredes
+                if(avatar.pos.getX() < 0){
+                    avatar.pos.setX(25);
+                }
+                if(avatar.pos.getY() > canvas.getHeight() - 50){
+                    avatar.pos.setY(canvas.getHeight() - 50);
+                }
+                if(avatar.pos.getY() < 0){
+                    currentLevel = 1;
+                    avatar.pos.setY(canvas.getHeight());
+                }
+
+                //Colisiones
+                for(int i = 0; i < level.getBullets().size(); i++){
+                    Bullet bn = level.getBullets().get(i);
+                    for(int j = 0; j < level.getEnemies().size(); j++){
+                        Enemy en = level.getEnemies().get(j);
+
+                        double distance = Math.sqrt(
+                                Math.pow(en.pos.getX()-bn.pos.getX(), 2) +
+                                        Math.pow(en.pos.getY()-bn.pos.getY(), 2)
+                        );
+
+                        if(distance < 5){
+                            level.getBullets().remove(i);
+                            level.getEnemies().remove(j);
+
+                        }
+                    }
+                }
 
 
                 if(Wpressed){
